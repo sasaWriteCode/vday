@@ -9,9 +9,17 @@
             font-family: Arial, sans-serif;
             text-align: center;
             background-color: #ffecb3;
+            position: relative;
+            overflow: hidden;
         }
         .container {
             margin-top: 50px;
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
         }
         h1 {
             color: #FF4081;
@@ -19,6 +27,32 @@
         img {
             width: 300px;
             height: auto;
+        }
+        .rose {
+            position: absolute;
+            width: 30px;
+            height: auto;
+        }
+        .mail-container {
+            margin-top: 30px;
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .letter {
+            display: none;
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            width: 250px;
+        }
+        .mail-container.open .letter {
+            display: block;
         }
         @media (max-width: 600px) {
             img {
@@ -28,9 +62,39 @@
     </style>
 </head>
 <body>
+    <script>
+        function createRoses() {
+            for (let i = 0; i < 999; i++) {
+                let rose = document.createElement("img");
+                rose.src = "Rose.jpg";
+                rose.classList.add("rose");
+                rose.style.left = `${Math.random() * 100}%`;
+                rose.style.top = `${Math.random() * 100}%`;
+                document.body.appendChild(rose);
+            }
+        }
+        
+        function openLetter() {
+            document.querySelector('.mail-container').classList.toggle('open');
+        }
+        
+        window.onload = createRoses;
+    </script>
+    
     <div class="container">
         <h1>Yay! 🎉 Thanks for being my Valentine! ❤️</h1>
-        <img src="https://media.giphy.com/media/3ofSBt73ZyyHVjDzIQ/giphy.gif?cid=790b7611owdtkdfz4t54pvbd1pi8ter8g3x9i5s3u2715gnp&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Happy SpongeBob">
+        <img src="https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif" alt="Happy SpongeBob">
+        <p>Your special message goes here!</p>
+    </div>
+    
+    <div class="mail-container" onclick="openLetter()">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Envelope_letter.svg" alt="Mail" width="100">
+        <div class="letter">
+            <p>My dearest Valentine,</p>
+            <p>You mean the world to me, and I am so lucky to have you. ❤️</p>
+            <p>Love always,</p>
+            <p>[Your Name]</p>
+        </div>
     </div>
 </body>
 </html>
